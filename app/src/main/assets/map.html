@@ -7,8 +7,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="leaflet.css">
-    <script src="leaflet.js"></script>
+<!--    <link rel="stylesheet" href="leaflet.css">-->
+<!--    <script src="leaflet.js"></script>-->
+    <link href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.js" charset="utf-8"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/leaflet-locatecontrol/0.79.0/L.Control.Locate.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/leaflet-locatecontrol/0.79.0/L.Control.Locate.min.js" charset="utf-8"></script>
+
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>-->
     <style>
 		html, body {
 			height: 100%;
@@ -27,18 +34,27 @@
 <div id='map'></div>
 
 <script>
-	var map = L.map('map').fitWorld();
+	var map = L.map('map',{
+	   minZoom: 1, // 最小缩放
+      maxZoom: 24, // 最大缩放
+      center: [23.125178, 113.280637], // 默认地图中心
+      zoom: 6, // 默认缩放层级
+      zoomControl: true, // 启用缩放控件
+      attributionControl: false, // 禁用右下角的版权说明
+      crs: L.CRS.EPSG3857,
+      }).fitWorld();
 	map.panTo(new L.LatLng(12, 15));
 	map.zoomIn(1);
     var popup = L.popup();
     var alreadyRunning = false;
 
 
-	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        minZoom: 1,
-        maxZoom: 19,
+	L.tileLayer('https://tile.openstreetmap.de//{z}/{x}/{y}.png', {
+        //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 1, // 最小缩放
+      maxZoom: 24, // 最大缩放
     }).addTo(map);
+
 
     var icon = L.icon({
         iconUrl: 'marker-icon-2x.png',
